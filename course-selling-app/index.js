@@ -1,12 +1,13 @@
-const { express, jwt, dotenv, z } = require("library");
+const { express, jwt, z } = require("library");
+const { userRouter } = require("./routes/user");
+const { courseRouter } = require("./routes/course");
+const { adminRouter } = require("./routes/admin");
 const app = express();
 
 app.use(express.json());
 
-app.post("/user/signup", (req, res) => {res.json({message:''})});
-app.post('/user/signin', (req, res)=>{res.json({message:''}})
-app.get('/user/purchases', (req, res)=>{res.json({message:''}})
-app.post('/course/purchase', (req, res)=>{res.json({message:''}})
-app.get("/courses", (req, res) => {res.json({message:''}) });
+app.use('/users', userRouter)
+app.use('/courses', courseRouter)
+app.use("/admin", adminRouter);
 
 app.listen(3000);
