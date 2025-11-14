@@ -1,4 +1,4 @@
-const { express, jwt, z } = require("library");
+const { express, jwt, z, mongoose } = require("library");
 const { userRouter } = require("./routes/user");
 const { courseRouter } = require("./routes/course");
 const { adminRouter } = require("./routes/admin");
@@ -10,4 +10,9 @@ app.use('/users', userRouter)
 app.use('/courses', courseRouter)
 app.use("/admin", adminRouter);
 
-app.listen(3000);
+async function main() {
+    await mongoose.connect(process.env.DB_URL)
+    app.listen(3000);
+}
+
+main()
